@@ -99,63 +99,40 @@ const [initialParticipantList] = useState<Participant[]>([
     if (!over) return;
 
     const participantId = active.id;
-    const destinationTeamId = over.id;
+    const destinationId = over.id;
 
-    const sourceTeamIndex = teams.findIndex((team) =>
-      team.participants.some((p) => p.id === participantId)
-    );
-    const targetTeamIndex = teams.findIndex((team) => team.id === destinationTeamId);
+    const participantInTeams = teams.flatMap((team) => team.participants).find((p) => p.id === participantId);
+    const participant = participantInTeams ?? allParticipants.find((p) => p.id === participantId);
+    if (!participant) return;
 
-    if (destinationTeamId === 'unassigned') {
-      if (sourceTeamIndex === -1) return;
-      const dragged = teams[sourceTeamIndex].participants.find(p => p.id === participantId);
-      if (!dragged) return;
-      const updatedSource = {
-        ...teams[sourceTeamIndex],
-        participants: teams[sourceTeamIndex].participants.filter(p => p.id !== participantId),
+    const sourceTeamIndex = teams.findIndex((team) => team.participants.some((p) => p.id === participantId));
+    const targetTeamIndex = teams.findIndex((team) => team.id === destinationId);
+
+    const updatedTeams = [...teams];
+
+    if (sourceTeamIndex !== -1) {
+      const sourceTeam = updatedTeams[sourceTeamIndex];
+      updatedTeams[sourceTeamIndex] = {
+        ...sourceTeam,
+        participants: sourceTeam.participants.filter((p) => p.id !== participantId),
       };
-      const updated = [...teams];
-      updated[sourceTeamIndex] = updatedSource;
-      setTeams(updated);
+    }
+
+    if (destinationId === 'unassigned') {
+      setTeams(updatedTeams);
       return;
     }
 
-    if (sourceTeamIndex === -1 && targetTeamIndex !== -1) {
-      const dragged = allParticipants.find((p) => p.id === participantId);
-      if (!dragged) return;
-
-      const updatedTarget = {
-        ...teams[targetTeamIndex],
-        participants: [...teams[targetTeamIndex].participants, dragged],
+    if (targetTeamIndex !== -1) {
+      const targetTeam = updatedTeams[targetTeamIndex];
+      updatedTeams[targetTeamIndex] = {
+        ...targetTeam,
+        participants: [...targetTeam.participants, participant],
       };
-
-      const updated = [...teams];
-      updated[targetTeamIndex] = updatedTarget;
-      setTeams(updated);
-      return;
+      setTeams(updatedTeams);
     }
+  }
 
-  if (sourceTeamIndex === -1 || targetTeamIndex === -1) return;
-  if (sourceTeamIndex === targetTeamIndex) return;
-
-  const dragged = teams[sourceTeamIndex].participants.find(p => p.id === participantId);
-  if (!dragged) return;
-
-  const updatedSource = {
-    ...teams[sourceTeamIndex],
-    participants: teams[sourceTeamIndex].participants.filter(p => p.id !== participantId),
-  };
-
-  const updatedTarget = {
-    ...teams[targetTeamIndex],
-    participants: [...teams[targetTeamIndex].participants, dragged],
-  };
-
-  const updated = [...teams];
-  updated[sourceTeamIndex] = updatedSource;
-  updated[targetTeamIndex] = updatedTarget;
-  setTeams(updated);
-}
   
   const [activeId, setActiveId] = useState<string | null>(null);
 
