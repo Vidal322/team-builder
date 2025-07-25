@@ -1,6 +1,7 @@
 import { useDroppable } from '@dnd-kit/core';
 import ParticipantCard from './ParticipantCard';
 import { Team } from '@/types';
+import { getTeamAvgAge } from '@/utils/teamAvgAge';
 
 type Props = {
   team: Team;
@@ -11,12 +12,7 @@ export default function TeamColumn({ team, activeId }: Props) {
   const { setNodeRef, isOver } = useDroppable({ id: team.id });
 
   const participantCount = team.participants.length;
-  const averageAge =
-    participantCount > 0
-      ? Math.round(
-          team.participants.reduce((sum, p) => sum + (p.age || 0), 0) / participantCount
-        )
-      : null;
+  const averageAge = getTeamAvgAge(team); 
 
   return (
     <div
