@@ -1,7 +1,7 @@
 // components/TeamBoard.tsx
 
 import TeamCard from './TeamCard';
-import { Team } from '@/lib/generator';
+import { Team } from '@/types';
 
 type TeamBoardProps = {
   teams: Team[];

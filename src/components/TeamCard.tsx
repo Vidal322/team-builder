@@ -1,6 +1,6 @@
 import { useDroppable } from '@dnd-kit/core';
 import ParticipantCard from './ParticipantCard';
-import { Team } from '@/lib/generator';
+import { Team } from '@/types';
 
 type Props = {
   team: Team;

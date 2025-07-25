@@ -2,7 +2,8 @@
 'use client';
 
 import { useState } from 'react';
-import { generateBalancedTeams, Team, Participant } from '@/lib/generator';
+import { generateBalancedTeams} from '@/lib/generator';
+import { Team, Participant } from '@/types'
 import TeamBoard from '@/components/TeamBoard';
 import ParticipantsBoard from '@/components/ParticipantBoard';
 import { v4 as uuidv4 } from 'uuid';

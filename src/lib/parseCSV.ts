@@ -1,7 +1,7 @@
 // lib/parseCSV.ts
 import Papa from 'papaparse';
 import { v4 as uuidv4 } from 'uuid';
-import { Participant } from './generator';
+import { Participant } from '@/types';
 
 export function parseCSVParticipants(file: File): Promise<Participant[]> {
   return new Promise((resolve, reject) => {

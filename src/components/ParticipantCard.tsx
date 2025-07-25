@@ -1,5 +1,5 @@
 import { useDraggable } from '@dnd-kit/core';
-import { Participant } from '@/lib/generator';
+import { Participant } from '@/types';
 
 type Props = {
   participant: Participant;
