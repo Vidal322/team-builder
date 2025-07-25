@@ -1,6 +1,7 @@
 import { useDroppable } from '@dnd-kit/core';
 import ParticipantCard from './ParticipantCard';
 import { Participant } from '@/types';
+import { groupParticipantsByRoom } from '@/utils/groupByRoom';
 
 type Props = {
   participants: Participant[];
@@ -8,13 +9,9 @@ type Props = {
 };
 
 export default function ParticipantsBoard({ participants, activeId }: Props) {
-  const { setNodeRef, isOver } = useDroppable({ id: 'unassigned' });
 
-  const grouped = participants.reduce((acc, p) => {
-    if (!acc[p.room]) acc[p.room] = [];
-    acc[p.room].push(p);
-    return acc;
-  }, {} as Record<string, Participant[]>);
+  const { setNodeRef, isOver } = useDroppable({ id: 'unassigned' });
+  const grouped = groupParticipantsByRoom(participants);  // TODO: Maybe don't do this here and pass list already organised?
 
   return (
     <div

@@ -165,7 +165,7 @@ const [initialParticipantList] = useState<Participant[]>([
       sensors={sensors}
       collisionDetection={closestCenter}
       modifiers={[restrictToWindowEdges]}
-      onDragStart={(event) => setActiveId(event.active.id)}
+      onDragStart={(event) => setActiveId(String(event.active.id))}
       onDragEnd={(event) => {
         setActiveId(null);
         handleDragEnd(event);
