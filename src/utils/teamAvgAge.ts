@@ -1,4 +1,4 @@
-import {Participant, Team} from '@/types'
+import {Team} from '@/types'
 
 export function getTeamAvgAge(team :Team){
 

@@ -14,7 +14,8 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
-  DragOverlay
+  DragOverlay,
+  DragEndEvent
 } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { useEffect } from 'react';
@@ -70,6 +71,11 @@ const [initialParticipantList] = useState<Participant[]>([
   const sensors = useSensors(useSensor(PointerSensor));
 
 
+  const assignedIds = teams.flatMap((t) => t.participants.map((p) => p.id));
+  const unassignedParticipants = allParticipants.filter((p) => !assignedIds.includes(p.id));
+
+  const [activeId, setActiveId] = useState<string | null>(null);
+
   useEffect(() => {
     setAllParticipants(initialParticipantList);
     setInitialParticipants(initialParticipantList);
@@ -80,9 +86,7 @@ const [initialParticipantList] = useState<Participant[]>([
         }));
 
         setTeams(emptyTeams);
-      }, []); 
-
-
+      }, [initialParticipantList, numTeams]); 
 
   function handleGenerate() {
 
@@ -90,11 +94,7 @@ const [initialParticipantList] = useState<Participant[]>([
     setTeams(newTeams);
   }
 
-
-  const assignedIds = teams.flatMap((t) => t.participants.map((p) => p.id));
-  const unassignedParticipants = allParticipants.filter((p) => !assignedIds.includes(p.id));
-
-  function handleDragEnd(event: any) {
+  function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
     if (!over) return;
 
@@ -134,8 +134,6 @@ const [initialParticipantList] = useState<Participant[]>([
   }
 
   
-  const [activeId, setActiveId] = useState<string | null>(null);
-
 
   return (
     <DndContext
@@ -214,7 +212,7 @@ const [initialParticipantList] = useState<Participant[]>([
             </div>
 
 
-            <TeamBoard teams={teams} setTeams={setTeams} activeId={activeId }/>
+            <TeamBoard teams={teams}/>
           </div>
 
           {/* RIGHT: Unassigned Participants */}
