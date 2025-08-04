@@ -2,6 +2,7 @@
 import Papa from 'papaparse';
 import { v4 as uuidv4 } from 'uuid';
 import { Participant } from '@/types';
+import { trackFallbackParamAccessed } from 'next/dist/server/app-render/dynamic-rendering';
 
 export function parseCSVParticipants(file: File): Promise<Participant[]> {
   return new Promise((resolve, reject) => {
@@ -17,7 +18,9 @@ export function parseCSVParticipants(file: File): Promise<Participant[]> {
             name: row.name.trim(),
             room: row.room.trim(),
             gender: row.gender.trim().toLowerCase() as 'male' | 'female',
-            age: parseInt(row.age, 10)
+            age: parseInt(row.age, 10),
+            problematic: false,
+            problematic_friends: []
           }));
 
           resolve(participants);

@@ -4,6 +4,8 @@ export type Participant = {
   room: string;
   gender: 'male' | 'female';
   age: number;
+  problematic: boolean;
+  problematic_friends: Participant[];
 };
 
 export type Team = {

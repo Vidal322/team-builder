@@ -32,7 +32,24 @@ export default function ParticipantCard({ participant, activeId }: Props) {
       {...attributes}
       className={`border rounded px-3 py-2 shadow text-gray-800 max-w-xs w-full transition-opacity duration-200 ${colorClass}`}
     >
-    {participant.name}{" "} <span className="text-xs text-gray-500">({participant.age} anos, {participant.room})</span>
+      <div className="flex items-center justify-between">
+        <span>
+          {participant.name}{" "}
+          <span className="text-xs text-gray-500">
+            ({participant.age} anos, {participant.room})
+          </span>
+        </span>
+        {participant.problematic && (
+          <span
+            className="text-red-600 text-xl ml-2"
+            title="Participante problemático"
+            role="img"
+            aria-label="danger"
+          >
+            ⚠️
+          </span>
+        )}
+      </div>
     </li>
   );
 }

@@ -51,15 +51,15 @@ async function handleCSVUpload(e: React.ChangeEvent<HTMLInputElement>) {
 
 
 const [initialParticipantList] = useState<Participant[]>([
-  { id: uuidv4(), name: 'Ana', gender: 'female', room: 'A', age: 12 },
-  { id: uuidv4(), name: 'Bruno', gender: 'male', room: 'A', age: 10},
-  { id: uuidv4(), name: 'Carla', gender: 'female', room: 'B', age: 13 },
-  { id: uuidv4(), name: 'Daniel', gender: 'male', room: 'B', age: 14 },
-  { id: uuidv4(), name: 'Eva', gender: 'female', room: 'B', age: 15},
-  { id: uuidv4(), name: 'Filipe', gender: 'male', room: 'C', age: 14 },
-  { id: uuidv4(), name: 'Gabriela', gender: 'female', room: 'C', age: 9 },
-  { id: uuidv4(), name: 'Hugo', gender: 'male', room: 'C', age: 8 },
-  { id: uuidv4(), name: 'Inês', gender: 'female', room: 'C', age: 11 },
+  { id: uuidv4(), name: 'Ana', gender: 'female', room: 'A', age: 12, problematic: true, problematic_friends: [] },
+  { id: uuidv4(), name: 'Bruno', gender: 'male', room: 'A', age: 10, problematic: true, problematic_friends: [] },
+  { id: uuidv4(), name: 'Carla', gender: 'female', room: 'B', age: 13, problematic: true, problematic_friends: []  },
+  { id: uuidv4(), name: 'Daniel', gender: 'male', room: 'B', age: 14, problematic: true, problematic_friends: []  },
+  { id: uuidv4(), name: 'Eva', gender: 'female', room: 'B', age: 15, problematic: true, problematic_friends: [] },
+  { id: uuidv4(), name: 'Filipe', gender: 'male', room: 'C', age: 14, problematic: true, problematic_friends: []  },
+  { id: uuidv4(), name: 'Gabriela', gender: 'female', room: 'C', age: 9, problematic: true, problematic_friends: []  },
+  { id: uuidv4(), name: 'Hugo', gender: 'male', room: 'C', age: 8, problematic: true, problematic_friends: []  },
+  { id: uuidv4(), name: 'Inês', gender: 'female', room: 'C', age: 11, problematic: true, problematic_friends: []  },
 ]);
 
 
