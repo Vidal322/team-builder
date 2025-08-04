@@ -39,7 +39,7 @@ export default function ParticipantCard({ participant, activeId }: Props) {
             ({participant.age} anos, {participant.room})
           </span>
         </span>
-        {participant.problematic && (
+        {participant.isProblematic && (
           <span
             className="text-red-600 text-xl ml-2"
             title="Participante problemático"

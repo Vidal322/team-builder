@@ -19,7 +19,7 @@ export function parseCSVParticipants(file: File): Promise<Participant[]> {
             room: row.room.trim(),
             gender: row.gender.trim().toLowerCase() as 'male' | 'female',
             age: parseInt(row.age, 10),
-            problematic: false,
+            isProblematic: false,
             problematic_friends: []
           }));
 

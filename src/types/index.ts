@@ -4,7 +4,7 @@ export type Participant = {
   room: string;
   gender: 'male' | 'female';
   age: number;
-  problematic: boolean;
+  isProblematic: boolean;
   problematic_friends: Participant[];
 };
 
